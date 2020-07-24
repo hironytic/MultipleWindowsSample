@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5040E10B24CAC6A5002DF8F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5040E10A24CAC6A5002DF8F9 /* SceneDelegate.swift */; };
 		5096033124C87F79000DA7AD /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5096033024C87F79000DA7AD /* SessionDetailViewController.swift */; };
 		5096033324C9253E000DA7AD /* initial.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5096033224C9251D000DA7AD /* initial.realm */; };
 		50C5E88624C4744900EA36A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C5E88524C4744900EA36A9 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5040E10A24CAC6A5002DF8F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5096033024C87F79000DA7AD /* SessionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
 		5096033224C9251D000DA7AD /* initial.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = initial.realm; sourceTree = "<group>"; };
 		50C5E88224C4744900EA36A9 /* Sessions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sessions.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				50C5E88524C4744900EA36A9 /* AppDelegate.swift */,
+				5040E10A24CAC6A5002DF8F9 /* SceneDelegate.swift */,
 				50C5E8A424C5B45700EA36A9 /* SessionListViewController.swift */,
 				5096033024C87F79000DA7AD /* SessionDetailViewController.swift */,
 				50C5E88B24C4744900EA36A9 /* Main.storyboard */,
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5040E10B24CAC6A5002DF8F9 /* SceneDelegate.swift in Sources */,
 				50C5E8A524C5B45700EA36A9 /* SessionListViewController.swift in Sources */,
 				50C5E88624C4744900EA36A9 /* AppDelegate.swift in Sources */,
 				5096033124C87F79000DA7AD /* SessionDetailViewController.swift in Sources */,
