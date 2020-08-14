@@ -36,7 +36,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        if let activity = connectionOptions.userActivities.first ?? session.stateRestorationActivity {
+        if let shortcutItem = connectionOptions.shortcutItem {
+            setupViewController(for: shortcutItem)
+        } else if let activity = connectionOptions.userActivities.first ?? session.stateRestorationActivity {
             setupViewController(with: activity)
         }
     }
@@ -44,10 +46,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func setupViewController(with activity: NSUserActivity) {
         guard activity.activityType == "com.hironytic.Sessions.SessionDetail" else { return }
         guard let sessionId = activity.userInfo?["sessionId"] as? String else { return }
-        guard let navigationController = window?.rootViewController as? UINavigationController else { return }
         let isAuxiliary = activity.userInfo?["isAuxiliary"] as? Bool ?? false
-
+        setupDetailViewController(sessionId: sessionId, isAuxiliary: isAuxiliary)
+    }
+    
+    func setupViewController(for shortcutItem: UIApplicationShortcutItem) {
+        guard shortcutItem.type == "com.hironytic.Sessions.SessionDetail" else { return }
+        guard let sessionId = shortcutItem.userInfo?["sessionId"] as? String else { return }
+        setupDetailViewController(sessionId: sessionId, isAuxiliary: false)
+    }
+    
+    func setupDetailViewController(sessionId:  String, isAuxiliary: Bool) {
+        guard let navigationController = window?.rootViewController as? UINavigationController else { return }
         let detailVc = SessionDetailViewController.instantiate(sessionId: sessionId, isAuxiliary: isAuxiliary)
+        navigationController.popToRootViewController(animated: false)
         navigationController.pushViewController(detailVc, animated: false)
     }
 
@@ -81,6 +93,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
         return scene.userActivity
+    }
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        setupViewController(for: shortcutItem)
+        completionHandler(true)
     }
 }
 

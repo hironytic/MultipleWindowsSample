@@ -68,6 +68,19 @@ class SessionDetailViewController: UIViewController {
                     self?.update(from: session)
                 }
                 .store(in: &cancellables)
+
+            // Register to quick actions
+            let targetContentIdentifier = "com.hironytic.Sessions.SessionDetail/\(sessionId)"
+            let shortcutItem = UIMutableApplicationShortcutItem(type: "com.hironytic.Sessions.SessionDetail",
+                                                                localizedTitle: obsSession.session.title,
+                                                                localizedSubtitle: nil,
+                                                                icon: nil,
+                                                                userInfo: ["sessionId": sessionId as NSSecureCoding])
+            shortcutItem.targetContentIdentifier = targetContentIdentifier
+            var shortcutItems = UIApplication.shared.shortcutItems ?? []
+            shortcutItems.removeAll(where: { $0.targetContentIdentifier as? String ?? "" == targetContentIdentifier })
+            shortcutItems.insert(shortcutItem, at: 0)
+            UIApplication.shared.shortcutItems = shortcutItems
         }
     }
     
@@ -80,6 +93,13 @@ class SessionDetailViewController: UIViewController {
             "isAuxiliary": isAuxiliary,
         ]
         view.window?.windowScene?.userActivity = userActivity
+        
+        if let activationConditions = view.window?.windowScene?.activationConditions {
+            let targetContentIdentifier = "com.hironytic.Sessions.SessionDetail/\(sessionId)"
+            let predicate = NSPredicate(format: "Self == %@", targetContentIdentifier)
+            activationConditions.canActivateForTargetContentIdentifierPredicate = predicate
+            activationConditions.prefersToActivateForTargetContentIdentifierPredicate = predicate
+        }
     }
     
     private func update(from session: Session) {

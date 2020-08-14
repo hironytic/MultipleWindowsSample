@@ -61,6 +61,11 @@ class SessionListViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         view.window?.windowScene?.userActivity = nil
+        
+        if let activationConditions = view.window?.windowScene?.activationConditions {
+            activationConditions.canActivateForTargetContentIdentifierPredicate = NSPredicate(value: true)
+            activationConditions.prefersToActivateForTargetContentIdentifierPredicate = NSPredicate(value: true)
+        }
 
         isViewAppeared = true
     }
