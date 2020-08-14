@@ -65,6 +65,16 @@ class SessionDetailViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let userActivity = NSUserActivity(activityType: "com.hironytic.Sessions.SessionDetail")
+        userActivity.userInfo = [
+            "sessionId": sessionId
+        ]
+        view.window?.windowScene?.userActivity = userActivity
+    }
+    
     private func update(from session: Session) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"

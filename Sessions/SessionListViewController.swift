@@ -57,6 +57,9 @@ class SessionListViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        view.window?.windowScene?.userActivity = nil
+
         isViewAppeared = true
     }
     
