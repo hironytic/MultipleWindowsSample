@@ -33,6 +33,8 @@ class SessionListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.dragDelegate = self
+        
         let sessionStore = SessionStore.sharedInstance
         sessions = sessionStore.sessions
         
@@ -102,6 +104,20 @@ class SessionListViewController: UITableViewController {
 
         let detailVc = SessionDetailViewController.instantiate(sessionId: session.id)
         navigationController?.pushViewController(detailVc, animated: true)
+    }
+}
+
+extension SessionListViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let session = sessions[indexPath.row]
+        let userActivity = NSUserActivity(activityType: "com.hironytic.Sessions.SessionDetail")
+        userActivity.userInfo = [
+            "sessionId": session.id
+        ]
+        
+        let itemProvider = NSItemProvider(object: userActivity)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        return [dragItem]
     }
 }
 
