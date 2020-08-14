@@ -102,7 +102,7 @@ class SessionListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let session = sessions[indexPath.row]
 
-        let detailVc = SessionDetailViewController.instantiate(sessionId: session.id)
+        let detailVc = SessionDetailViewController.instantiate(sessionId: session.id, isAuxiliary: false)
         navigationController?.pushViewController(detailVc, animated: true)
     }
 }
@@ -112,7 +112,8 @@ extension SessionListViewController: UITableViewDragDelegate {
         let session = sessions[indexPath.row]
         let userActivity = NSUserActivity(activityType: "com.hironytic.Sessions.SessionDetail")
         userActivity.userInfo = [
-            "sessionId": session.id
+            "sessionId": session.id,
+            "isAuxiliary": true,
         ]
         
         let itemProvider = NSItemProvider(object: userActivity)

@@ -45,8 +45,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard activity.activityType == "com.hironytic.Sessions.SessionDetail" else { return }
         guard let sessionId = activity.userInfo?["sessionId"] as? String else { return }
         guard let navigationController = window?.rootViewController as? UINavigationController else { return }
+        let isAuxiliary = activity.userInfo?["isAuxiliary"] as? Bool ?? false
 
-        let detailVc = SessionDetailViewController.instantiate(sessionId: sessionId)
+        let detailVc = SessionDetailViewController.instantiate(sessionId: sessionId, isAuxiliary: isAuxiliary)
         navigationController.pushViewController(detailVc, animated: false)
     }
 

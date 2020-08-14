@@ -39,18 +39,24 @@ class SessionDetailViewController: UIViewController {
     @IBOutlet weak var starIcon: UIButton!
     
     private(set) var sessionId: String = ""
+    private(set) var isAuxiliary: Bool = false
     private var obsSession: ObservableSession?
     
-    static func instantiate(sessionId: String) -> SessionDetailViewController {
+    static func instantiate(sessionId: String, isAuxiliary: Bool) -> SessionDetailViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let viewController = storyboard.instantiateViewController(identifier: "SessionDetail") as! SessionDetailViewController
         viewController.sessionId = sessionId
+        viewController.isAuxiliary = isAuxiliary
         return viewController
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if isAuxiliary {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeButtonDidTap(_:)))
+        }
+        
         starIcon.imageView?.contentMode = .scaleAspectFit
 
         let sessionStore = SessionStore.sharedInstance
@@ -70,7 +76,8 @@ class SessionDetailViewController: UIViewController {
         
         let userActivity = NSUserActivity(activityType: "com.hironytic.Sessions.SessionDetail")
         userActivity.userInfo = [
-            "sessionId": sessionId
+            "sessionId": sessionId,
+            "isAuxiliary": isAuxiliary,
         ]
         view.window?.windowScene?.userActivity = userActivity
     }
@@ -95,5 +102,13 @@ class SessionDetailViewController: UIViewController {
         
         let sessionStore = SessionStore.sharedInstance
         try? sessionStore.changeSession(of: sessionId, isStarred: !session.isStarred)
+    }
+    
+    @objc
+    private func closeButtonDidTap(_ sender: Any) {
+        guard let scene = view.window?.windowScene else { return }
+        let options = UIWindowSceneDestructionRequestOptions()
+        options.windowDismissalAnimation = .standard
+        UIApplication.shared.requestSceneSessionDestruction(scene.session, options: options)
     }
 }
