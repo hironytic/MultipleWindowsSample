@@ -92,7 +92,10 @@ class SessionDetailViewController: UIViewController {
             "sessionId": sessionId,
             "isAuxiliary": isAuxiliary,
         ]
-        view.window?.windowScene?.userActivity = userActivity
+        if let scene = view.window?.windowScene {
+            scene.userActivity = userActivity
+            scene.title = titleLabel.text
+        }
         
         if let activationConditions = view.window?.windowScene?.activationConditions {
             let targetContentIdentifier = "com.hironytic.Sessions.SessionDetail/\(sessionId)"
@@ -115,6 +118,7 @@ class SessionDetailViewController: UIViewController {
         speakerIcon.layer.cornerRadius = speakerIcon.frame.height / 2.0
         starIcon.setImage(session.isStarred ? UIImage(systemName: "star.fill") : UIImage(systemName: "star"), for: .normal)
         abstractLabel.text = session.abstract
+        view.window?.windowScene?.title = session.title
     }
     
     @IBAction func starIconDidTap(_ sender: Any) {

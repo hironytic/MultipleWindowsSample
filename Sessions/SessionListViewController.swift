@@ -60,7 +60,10 @@ class SessionListViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        view.window?.windowScene?.userActivity = nil
+        if let scene = view.window?.windowScene {
+            scene.userActivity = nil
+            scene.title = nil
+        }
         
         if let activationConditions = view.window?.windowScene?.activationConditions {
             activationConditions.canActivateForTargetContentIdentifierPredicate = NSPredicate(value: true)
