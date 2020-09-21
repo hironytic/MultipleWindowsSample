@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		503750DC2518257400F8C248 /* NotificationReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503750DB2518257400F8C248 /* NotificationReceiver.swift */; };
 		5040E10B24CAC6A5002DF8F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5040E10A24CAC6A5002DF8F9 /* SceneDelegate.swift */; };
 		5096033124C87F79000DA7AD /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5096033024C87F79000DA7AD /* SessionDetailViewController.swift */; };
 		5096033324C9253E000DA7AD /* initial.realm in Resources */ = {isa = PBXBuildFile; fileRef = 5096033224C9251D000DA7AD /* initial.realm */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		503750DB2518257400F8C248 /* NotificationReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationReceiver.swift; sourceTree = "<group>"; };
 		5040E10A24CAC6A5002DF8F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5096033024C87F79000DA7AD /* SessionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
 		5096033224C9251D000DA7AD /* initial.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = initial.realm; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				50C5E89324C4745100EA36A9 /* Info.plist */,
 				50C5E8A224C47D1900EA36A9 /* Model.swift */,
 				5096033224C9251D000DA7AD /* initial.realm */,
+				503750DB2518257400F8C248 /* NotificationReceiver.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				50C5E88624C4744900EA36A9 /* AppDelegate.swift in Sources */,
 				5096033124C87F79000DA7AD /* SessionDetailViewController.swift in Sources */,
 				50C5E8A324C47D1900EA36A9 /* Model.swift in Sources */,
+				503750DC2518257400F8C248 /* NotificationReceiver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
